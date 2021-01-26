@@ -70,3 +70,5 @@ gem 'active_hash'
 gem 'slim-rails'
 # add gem html2slim
 gem 'html2slim'
+# add gem factory_bot_rails
+gem 'factory_bot_rails'
