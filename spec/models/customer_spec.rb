@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
-
   describe 'validations' do
-
     describe 'presence' do
       it { is_expected.to validate_presence_of(:name) }
       it { is_expected.to validate_presence_of(:email) }
@@ -24,6 +22,7 @@ RSpec.describe Customer, type: :model do
                                     'A_US-ER@foo.bar.org',
                                     'alice+bob@baz.cn').for(:email)
       end
+
       it do
         is_expected.to_not allow_values('user@example,com',
                                         'user_at_foo.org',
@@ -33,12 +32,13 @@ RSpec.describe Customer, type: :model do
       end
     end
 
-    describe 'validate unqueness of email' do
+    describe 'uniqueness of email' do
       let!(:customer) { create(:customer, email: 'original@example.com') }
       it 'is invalid with a duplicate email' do
         customer = build(:customer, email: 'original@example.com')
         expect(customer).to_not be_valid
       end
+
       it 'is case insensitive in email' do
         customer = build(:customer, email: 'ORIGINAL@EXAMPLE.COM')
         expect(customer).to_not be_valid
