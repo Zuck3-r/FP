@@ -15,9 +15,9 @@ Metrics/ClassLength:
 # １行の文字数を制限しない
 Metrics/LineLength:
   Enabled: false
-# １メソッドの行数を制限しない
+# １メソッドの行数を制限する
 Metrics/MethodLength:
-  Enabled: false
+  Enabled: true
 # 日本語コメントを許す
 Style/AsciiComments:
   Enabled: false
