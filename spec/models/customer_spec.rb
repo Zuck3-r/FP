@@ -1,41 +1,49 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
-  it '名前とメールアドレスとパスワードがあれば登録できる' do
-    expect(FactoryBot.create(:customer)).to be_valid
-  end
 
-  it '名前がnilなら登録されない' do
-    expect(FactoryBot.build(:customer, name: '')).to_not be_valid
-  end
+  describe 'validations' do
 
-  it '名前が空白なら登録されない' do
-    expect(FactoryBot.build(:customer, name: '　　　　')).to_not be_valid
-  end
+    context 'presence' do
+      it { is_expected.to validate_presence_of(:name) }
+      it { is_expected.to validate_presence_of(:email) }
+      it { is_expected.to validate_presence_of(:password) }
+    end
 
-  it 'メールアドレスがなければ登録できない' do
-    expect(FactoryBot.build(:customer, email: '')).to_not be_valid
-  end
+    context 'length' do
+      it { is_expected.to validate_length_of(:name).is_at_most(40) }
+      it { is_expected.to validate_length_of(:email).is_at_most(255) }
+      it { is_expected.to validate_length_of(:password).is_at_least(8) }
+    end
 
-  it 'メールアドレスが重複していたら登録できない' do
-    customer1 = FactoryBot.create(:customer, name: 'bob', email: 'bob@example.com')
-    expect(FactoryBot.build(:customer, name: 'alice', email: customer1.email)).to_not be_valid
-  end
+    context 'email characters' do
+      it do
+        is_expected.to allow_values('first.last@foo.jp',
+                                    'user@example.com',
+                                    'USER@foo.COM',
+                                    'A_US-ER@foo.bar.org',
+                                    'alice+bob@baz.cn').for(:email)
+      end
+      it do
+        is_expected.to_not allow_values('user@example,com',
+                                        'user_at_foo.org',
+                                        'user.name@example.',
+                                        'foo@bar_baz.com',
+                                        'foo@bar+baz.com').for(:email)
+      end
+    end
 
-  it 'パスワードがなければ登録できない' do
-    expect(FactoryBot.build(:customer, password: '')).to_not be_valid
-  end
+    context 'validate unqueness of email' do
+      let!(:customer) { create(:customer, email: 'original@example.com') }
+      it 'is invalid with a duplicate email' do
+        customer = build(:customer, email: 'original@example.com')
+        expect(customer).to_not be_valid
+      end
+      it 'is case insensitive in email' do
+        customer = build(:customer, email: 'ORIGINAL@EXAMPLE.COM')
+        expect(customer).to_not be_valid
+      end
+    end
 
-  it 'パスワードが空白なら登録されない' do
-    expect(FactoryBot.build(:customer, password: '　　　　　')).to_not be_valid
-  end
-
-  it 'パスワードが暗号化されているか' do
-    customer = FactoryBot.create(:customer)
-    expect(customer.password_digest).to_not eq 'pass1234'
-  end
-
-  it 'password_confirmationとpasswordが異なる場合保存できない' do
-    expect(FactoryBot.build(:customer, password: 'pass1234', password_confirmation: 'password')).to_not be_valid
   end
 end
