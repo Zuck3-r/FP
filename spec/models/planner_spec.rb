@@ -44,6 +44,5 @@ RSpec.describe Planner, type: :model do
         expect(planner).to_not be_valid
       end
     end
-
   end
 end

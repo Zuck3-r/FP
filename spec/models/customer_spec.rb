@@ -44,6 +44,5 @@ RSpec.describe Customer, type: :model do
         expect(customer).to_not be_valid
       end
     end
-
   end
 end
