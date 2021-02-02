@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   root 'planners#new'
-  resources :planners
+  resource :planners, only: %i[new create show edit update destroy]
 end
