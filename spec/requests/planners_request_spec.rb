@@ -1,18 +1,23 @@
 require 'rails_helper'
+require 'rspec/request_describer'
 
-RSpec.describe 'PlannersController', type: :request do
+RSpec.describe PlannersController, type: :request do
 
   describe 'GET /planners/new' do
-    it 'プランナーの新規登録画面表示に成功' do
-      get planners_new_path
-      expect(response).to have_http_status(200)
-    end
+      it { is_expected.to eq 200 }
   end
-  describe 'POST /planners/new'do
-    let!(:planner)
-    it 'プランナーを新規登録する' do
-      post planners_new_path, params: planner
-      expect(response).to redirect_to root_url
+  describe 'POST /planners'do
+    context 'param is correct' do
+      let(:planner) { FactoryBot.create(:planner) }
+      before do
+        params[:planner] = FactoryBot.attributes_for(:planner)
+      end
+      it do
+        expect{subject}.to change(Planner, :count).by(1)
+        expect(Planner.last.name).to eq planner.name
+        is_expected.to eq 302
+        expect(flash[:success]).to eq '登録完了　ログインしてください'
+      end
     end
   end
 end

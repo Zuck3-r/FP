@@ -73,3 +73,5 @@ gem 'slim-rails'
 gem 'html2slim'
 # add gem factory_bot_rails
 gem 'factory_bot_rails'
+# add gem rspec-request_describer
+gem 'rspec-request_describer'

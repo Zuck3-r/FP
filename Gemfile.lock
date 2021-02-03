@@ -184,6 +184,7 @@ GEM
       rspec-expectations (~> 3.10)
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
+    rspec-request_describer (0.3.2)
     rspec-support (3.10.1)
     rubocop (1.8.1)
       parallel (~> 1.10)
@@ -288,6 +289,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.1)
   rspec-rails (~> 4.0.1)
+  rspec-request_describer
   rubocop
   rubocop-performance
   rubocop-rails
