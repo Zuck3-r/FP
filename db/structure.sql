@@ -32,7 +32,7 @@ CREATE TABLE `customers` (
   `updated_at` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_customers_on_email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `planners`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -46,7 +46,7 @@ CREATE TABLE `planners` (
   `updated_at` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_planners_on_email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `schema_migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -54,6 +54,17 @@ DROP TABLE IF EXISTS `schema_migrations`;
 CREATE TABLE `schema_migrations` (
   `version` varchar(255) NOT NULL,
   PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `skills` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(15) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -68,6 +79,7 @@ CREATE TABLE `schema_migrations` (
 
 INSERT INTO `schema_migrations` (version) VALUES
 ('20210126080840'),
-('20210128021428');
+('20210128021428'),
+('20210204010813');
 
 
