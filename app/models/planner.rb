@@ -1,5 +1,4 @@
 class Planner < ApplicationRecord
-  has_many :skills
   has_many :planner_skills
   has_many :skills, through: :planner_skills
 
@@ -11,3 +10,4 @@ class Planner < ApplicationRecord
 
   has_secure_password
 end
+

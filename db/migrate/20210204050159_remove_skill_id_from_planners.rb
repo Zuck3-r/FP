@@ -3,3 +3,4 @@ class RemoveSkillIdFromPlanners < ActiveRecord::Migration[6.1]
     remove_column :planners, :skill_id, :integer
   end
 end
+

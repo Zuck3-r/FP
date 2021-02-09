@@ -7,3 +7,4 @@ Skill.create(name: '教育資金')
 Skill.create(name: '住宅資金')
 Skill.create(name: '資産運用')
 Skill.create(name: '相続・贈与')
+

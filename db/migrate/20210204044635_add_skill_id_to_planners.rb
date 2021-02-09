@@ -3,3 +3,4 @@ class AddSkillIdToPlanners < ActiveRecord::Migration[6.1]
     add_column :planners, :skill_id, :integer
   end
 end
+
