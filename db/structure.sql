@@ -39,11 +39,12 @@ DROP TABLE IF EXISTS `planner_skills`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `planner_skills` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `planner_id` int(11) DEFAULT NULL,
-  `skill_id` int(11) DEFAULT NULL,
+  `planner_id` int(11) NOT NULL,
+  `skill_id` int(11) NOT NULL,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_planner_skills_on_planner_id_and_skill_id` (`planner_id`,`skill_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `planners`;
