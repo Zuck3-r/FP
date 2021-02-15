@@ -23,6 +23,7 @@ class PlannersController < ApplicationController
   private
 
   def planner_params
-    params.require(:planner).permit(:name, :email, :password, :password_confirmation)
+    params.require(:planner).permit(:name, :email, :password, :password_confirmation, skill_ids: [])
   end
 end
+

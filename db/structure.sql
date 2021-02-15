@@ -32,7 +32,20 @@ CREATE TABLE `customers` (
   `updated_at` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_customers_on_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `planner_skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `planner_skills` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `planner_id` int(11) NOT NULL,
+  `skill_id` int(11) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_planner_skills_on_planner_id_and_skill_id` (`planner_id`,`skill_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `planners`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -46,7 +59,7 @@ CREATE TABLE `planners` (
   `updated_at` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_planners_on_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `schema_migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -80,6 +93,9 @@ CREATE TABLE `skills` (
 INSERT INTO `schema_migrations` (version) VALUES
 ('20210126080840'),
 ('20210128021428'),
-('20210204010813');
+('20210204010813'),
+('20210204044635'),
+('20210204045652'),
+('20210204050159');
 
 
