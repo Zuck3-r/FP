@@ -6,6 +6,7 @@ RSpec.describe PlannersController, type: :request do
   describe 'GET /planners/new' do
       it { is_expected.to eq 200 }
   end
+
   describe 'POST /planners'do
     context 'param is correct' do
       let(:planner) { FactoryBot.create(:planner) }

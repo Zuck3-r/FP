@@ -5,12 +5,12 @@ RSpec.describe CustomersController, type: :request do
   describe 'GET /customers/new' do
     it { is_expected.to eq 200 }
   end
+
   describe 'POST /customers'do
     context 'param is correct' do
       let(:customer) { FactoryBot.create(:customer) }
-      before do
-        params[:customer] = FactoryBot.attributes_for(:customer)
-      end
+      before { params[:customer] = FactoryBot.attributes_for(:customer) }
+
       it do
         expect{subject}.to change(Customer, :count).by(1)
         expect(Customer.last.name).to eq customer.name
