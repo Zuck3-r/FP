@@ -1,12 +1,31 @@
 require 'rails_helper'
 
-RSpec.describe "Customers", type: :request do
+RSpec.describe CustomersController, type: :request do
 
-  describe "GET /new" do
-    it "returns http success" do
-      get "/customers/new"
-      expect(response).to have_http_status(:success)
+  describe 'GET /customers/new' do
+    it { is_expected.to eq 200 }
+  end
+  describe 'POST /customers'do
+    context 'param is correct' do
+      let(:customer) { FactoryBot.create(:customer) }
+      before do
+        params[:customer] = FactoryBot.attributes_for(:customer)
+      end
+      it do
+        expect{subject}.to change(Customer, :count).by(1)
+        expect(Customer.last.name).to eq customer.name
+        is_expected.to eq 302
+        expect(flash[:success]).to eq '登録完了　ログインしてください'
+      end
+      context 'param is not correct' do
+        before do
+          params[:customer] = FactoryBot.attributes_for(:customer, email: '')
+        end
+        it do
+          expect{subject}.not_to change(Customer, :count)
+          is_expected.to eq 200
+        end
+      end
     end
   end
-
 end
