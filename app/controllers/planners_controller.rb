@@ -3,6 +3,7 @@ class PlannersController < ApplicationController
 
   def new
     @planner = Planner.new
+    @skills  = Skill.all
   end
 
   def create

@@ -75,3 +75,5 @@ gem 'html2slim'
 gem 'factory_bot_rails'
 # add gem rspec-request_describer
 gem 'rspec-request_describer'
+# add gem pry-rails
+gem 'pry-rails'
