@@ -17,14 +17,14 @@ RSpec.describe CustomersController, type: :request do
         is_expected.to eq 302
         expect(flash[:success]).to eq '登録完了　ログインしてください'
       end
-      context 'param is not correct' do
-        before do
-          params[:customer] = FactoryBot.attributes_for(:customer, email: '')
-        end
-        it do
-          expect{subject}.not_to change(Customer, :count)
-          is_expected.to eq 200
-        end
+    end
+
+    context 'param is not correct' do
+      before { params[:customer] = FactoryBot.attributes_for(:customer, email: '') }
+
+      it do
+        expect{subject}.not_to change(Customer, :count)
+        is_expected.to eq 200
       end
     end
   end
