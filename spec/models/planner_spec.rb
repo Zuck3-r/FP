@@ -14,7 +14,7 @@ RSpec.describe Planner, type: :model do
       it { is_expected.to validate_length_of(:password).is_at_least(8) }
     end
 
-    describe 'emoji' do
+    describe 'no-emoji' do
       it do
         is_expected.to_not allow_values('🍣').for(:name)
       end
