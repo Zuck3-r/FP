@@ -77,3 +77,5 @@ gem 'factory_bot_rails'
 gem 'rspec-request_describer'
 # add gem pry-rails
 gem 'pry-rails'
+# add gem emoji-validator
+gem 'emoji-validator'

@@ -14,6 +14,12 @@ RSpec.describe Customer, type: :model do
       it { is_expected.to validate_length_of(:password).is_at_least(8) }
     end
 
+    describe 'no-emoji' do
+      it do
+        is_expected.to_not allow_values('🍣').for(:name)
+      end
+    end
+
     describe 'email characters' do
       it do
         is_expected.to allow_values('first.last@foo.jp',
