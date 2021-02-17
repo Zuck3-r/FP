@@ -84,6 +84,9 @@ GEM
     concurrent-ruby (1.1.8)
     crass (1.0.6)
     diff-lcs (1.4.4)
+    emoji-validator (0.1.6)
+      activemodel (>= 4)
+      unicode-emoji
     erubi (1.10.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
@@ -255,6 +258,9 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
+    unicode-emoji (2.7.1)
+      unicode-version (~> 1.0)
+    unicode-version (1.1.0)
     web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -285,6 +291,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  emoji-validator
   factory_bot_rails
   html2slim
   jbuilder (~> 2.7)
