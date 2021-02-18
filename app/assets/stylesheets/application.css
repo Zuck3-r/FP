@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+.cover-text {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 28px;
+    color:#ffffff;
+    text-shadow    :
+            2px  2px 1px #000000,
+            -2px  2px 1px #000000,
+            2px -2px 1px #000000,
+            -2px -2px 1px #000000,
+            2px  0px 1px #000000,
+            0px  2px 1px #000000,
+            -2px  0px 1px #000000,
+            0px -2px 1px #000000;
+
+}
+.cover-img {
+    height: 600px;
+    display: table;
+    width: 100%;
+    background-size: cover;
+}
+
+h3 {
+    font-size: 50px;
+}
