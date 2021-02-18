@@ -14,6 +14,10 @@
  *= require_self
  */
 
+h1 {
+    border-bottom: solid 3px black;
+}
+
 .cover-text {
     display: table-cell;
     vertical-align: middle;
