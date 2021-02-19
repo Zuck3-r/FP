@@ -9,7 +9,7 @@ class PlannersController < ApplicationController
   def create
     @planner = Planner.new(planner_params)
     if @planner.save
-      redirect_to root_url, success: '登録完了　ログインしてください'
+      redirect_to login_url, success: '登録完了　ログインしてください'
     else
       render 'new'
     end
