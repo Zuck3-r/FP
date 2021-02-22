@@ -2,13 +2,7 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    case session_params[:flag]
-    when '0'
-      @user = Customer.find_by(email: session_params[:email])
-    when '1'
-      @user = Planner.find_by(email: session_params[:email])
-    end
-
+    @user = set_user
     if @user&.authenticate(session_params[:password])
       log_in(@user)
       redirect_to root_url, info: 'ログインしました'
@@ -26,6 +20,14 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:session).permit(:email, :password, :flag)
+  end
+
+  def set_user
+    if session_params[:flag] == '1'
+      Customer.find_by(email: session_params[:email])
+    else
+      Planner.find_by(email: session_params[:email])
+    end
   end
 end
 
