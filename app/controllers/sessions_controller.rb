@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
   end
 
   def set_user
-    if session_params[:flag] == '1'
+    if session_params[:flag] == '0'
       Customer.find_by(email: session_params[:email])
     else
       Planner.find_by(email: session_params[:email])
