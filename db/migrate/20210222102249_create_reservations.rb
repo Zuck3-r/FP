@@ -5,7 +5,6 @@ class CreateReservations < ActiveRecord::Migration[6.1]
       t.date :date, null: false
       t.integer :planner_id, null: false
       t.integer :customer_id
-
       t.timestamps
     end
   end

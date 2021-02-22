@@ -1,6 +1,7 @@
 class Planner < ApplicationRecord
   include Emoji::Validator::NoEmojiAnywhereValidator
 
+  has_many :reservations
   has_many :planner_skills
   has_many :skills, through: :planner_skills
 

@@ -1,6 +1,8 @@
 class Customer < ApplicationRecord
   include Emoji::Validator::NoEmojiAnywhereValidator
 
+  has_many :reservations
+
   before_save { self.email = email.downcase }
 
   validates :name, presence: true, length: { maximum: 40 }, no_emoji: true

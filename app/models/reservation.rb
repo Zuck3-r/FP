@@ -7,6 +7,7 @@ class Reservation < ApplicationRecord
   validates :time_table_id, presence: true, inclusion: { in: 1..16 }
   validates :date, presence: true, date: true
   validates :planner_id, uniqueness: { scope: %i[time_table_id date] }
+  validates :customer_id, numericality: { only_integer: true }, allow_nil: true
   validate :saturday_time
 
   def saturday_time
