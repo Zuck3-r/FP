@@ -6,7 +6,7 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
-      redirect_to root_url, success: '登録完了　ログインしてください'
+      redirect_to login_url, success: '登録完了　ログインしてください'
     else
       render 'new'
     end
