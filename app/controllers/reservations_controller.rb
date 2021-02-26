@@ -13,10 +13,27 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def update
+    @reservation = Reservation.find(params[:id])
+    if !@reservation.customer_id.nil? && right_customer?
+      @reservation.update_attribute(:customer_id, nil)
+      redirect_to customers_schedule_url, info: '予約をキャンセルしました'
+    elsif @reservation.customer_id.nil?
+      @reservation.update_attribute(:customer_id, current_user.id)
+      redirect_to customers_schedule_url, info: '予約出来ました'
+    else
+      redirect_to customers_schedule_url, danger: '先約があります'
+    end
+  end
+
   private
 
   def reservation_params
     params.require(:reservation).permit(:time_table_id, :date)
+  end
+
+  def right_customer?
+    @reservation.customer_id == current_user.id
   end
 end
 

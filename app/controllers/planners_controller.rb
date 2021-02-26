@@ -22,11 +22,11 @@ class PlannersController < ApplicationController
   end
 
   def edit
-    @planner = Planner.find(current_user.id)
+    @planner = Planner.find_by(id: current_user.id)
   end
 
   def update
-    @planner = Planner.find(current_user.id)
+    @planner = Planner.find_by(id: current_user.id)
     @planner.update_attribute(:skill_ids, params[:planner][:skill_ids])
     redirect_to current_user, success: 'スキルを変更しました'
   end

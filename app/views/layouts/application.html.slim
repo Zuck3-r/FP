@@ -21,7 +21,7 @@ html
         - elsif session_customer?
           ul.navbar-nav
             li.nav-item
-              = link_to "予約日程", '#', { class: "nav-link" }
+              = link_to "予約枠の確認", customers_schedule_url, { class: "nav-link" }
             li.nav-item
               = link_to "ログアウト", logout_path, class: "nav-link", method: :delete
         - else
@@ -38,3 +38,4 @@ html
     = value
   body
     = yield
+= stylesheet_link_tag "application", :media => "all"

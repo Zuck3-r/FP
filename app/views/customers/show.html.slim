@@ -1,0 +1,23 @@
+.center
+  .middle
+    h1
+      |お客様名：
+      = current_user.name
+
+
+.center
+  .middle
+    h4
+      | 予約枠検索
+
+    = form_with url: customers_search_path, method: :get, local: true do |f|
+      = f.label :date, '日にち'
+      = f.date_field :date, min: Date.current + 1
+      = f.label :skill, "スキル"
+      = f.collection_select(:skill_ids, Skill.all, :id, :name)
+      = f.submit '検索', class: "btn btn-info"
+
+    p
+      |※日曜は営業致しておりません
+       土曜の営業時間は11:00〜15:00となっております。
+       ご理解の程よろしくお願いいたします。

@@ -1,0 +1,26 @@
+.center
+  .middle
+    h1
+      | 予約枠の確認
+
+
+table.table
+  thead.thead-dark
+    tr
+      th scope="col"  日にち
+      th scope="col"  時間
+      th scope="col"  プランナー名
+      th scope="col"  スキル
+      th scope="col"  キャンセル
+
+- @reservations.each do |resv|
+  table.table
+    tbody
+      tr
+        td= resv.date
+        td= resv.time_table.time_range
+        td= Planner.find_by(id: resv.planner_id).name
+        - skill_names = []
+        - Planner.find_by(id: resv.planner_id).skills.map { |n| skill_names << n.name }
+        td= skill_names
+        td= link_to "キャンセル",  reservation_url(resv.id), method: :putch, class: "btn btn-danger", data:{confirm: "予約をキャンルします宜しいですか？"}
