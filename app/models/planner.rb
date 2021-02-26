@@ -1,7 +1,8 @@
 class Planner < ApplicationRecord
   include Emoji::Validator::NoEmojiAnywhereValidator
 
-  has_many :planner_skills
+  has_many :reservations, dependent: :destroy
+  has_many :planner_skills, dependent: :destroy
   has_many :skills, through: :planner_skills
 
   before_save { self.email = email.downcase }
