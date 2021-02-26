@@ -68,11 +68,16 @@ CREATE TABLE `reservations` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `time_table_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `planner_id` int(11) NOT NULL,
-  `customer_id` int(11) DEFAULT NULL,
+  `planner_id` bigint(20) NOT NULL,
+  `customer_id` bigint(20) DEFAULT NULL,
   `created_at` datetime(6) NOT NULL,
   `updated_at` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_reservations_on_planner_id_and_time_table_id_and_date` (`planner_id`,`time_table_id`,`date`),
+  KEY `index_reservations_on_planner_id` (`planner_id`),
+  KEY `index_reservations_on_customer_id` (`customer_id`),
+  CONSTRAINT `fk_rails_2e7a5301f5` FOREIGN KEY (`planner_id`) REFERENCES `planners` (`id`),
+  CONSTRAINT `fk_rails_c0d73f6d92` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `schema_migrations`;

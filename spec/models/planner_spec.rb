@@ -51,4 +51,11 @@ RSpec.describe Planner, type: :model do
       end
     end
   end
+
+  describe 'Association' do
+    it 'has_many reservations' do
+      association = described_class.reflect_on_association(:reservations)
+      expect(association.macro).to eq :has_many
+    end
+  end
 end

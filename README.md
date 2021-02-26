@@ -1,5 +1,8 @@
 # サービス名：フィナンシャルプランナー予約webアプリ
 
+### ER図
+<img width="893" alt="a" src="https://user-images.githubusercontent.com/51792327/109230794-ced3f180-7808-11eb-93ac-f76d92b18a8a.png">
+
 ### 環境
 - ruby 2.6.6
 - Rails 6.1.1
