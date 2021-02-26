@@ -1,4 +1,6 @@
 class PlannersController < ApplicationController
+  before_action :login_required, only: %i[edit update show schedule]
+  before_action :check_planner, only: %i[edit update show schedule]
   def index; end
 
   def new
@@ -15,11 +17,19 @@ class PlannersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @planner = Planner.find(current_user.id)
+  end
 
-  def edit; end
+  def edit
+    @planner = Planner.find(current_user.id)
+  end
 
-  def update; end
+  def update
+    @planner = Planner.find(current_user.id)
+    @planner.update_attribute(:skill_ids, params[:planner][:skill_ids])
+    redirect_to current_user, success: 'スキルを変更しました'
+  end
 
   private
 
