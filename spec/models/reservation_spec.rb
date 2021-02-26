@@ -8,4 +8,11 @@ RSpec.describe Reservation, type: :model do
       it { is_expected.to validate_presence_of(:planner_id) }
     end
   end
+
+  describe 'Association' do
+    describe 'belongs_to' do
+      it { is_expected.to belong_to(:planner) }
+      it { is_expected.to belong_to(:customer).optional }
+    end
+  end
 end
