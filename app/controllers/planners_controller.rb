@@ -22,7 +22,7 @@ class PlannersController < ApplicationController
     @reservation = Reservation.new
     @reservations = current_user.reservations
     @reservations = @reservations.after_today
-    @reservations = Reservation.where(customer_id: nil)
+    @reservations = @reservations.where(customer_id: nil)
   end
 
   def edit

@@ -26,6 +26,18 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    if !@reservation.customer_id.nil?
+      redirect_to current_user, danger: '予約入ってんぞ～'
+    elsif right_planner?
+      @reservation.destroy
+      redirect_to current_user, success: '削除しました'
+    else
+      redirect_to root_url, danger: '不正な処理です'
+    end
+  end
+
   private
 
   def reservation_params
@@ -34,6 +46,10 @@ class ReservationsController < ApplicationController
 
   def right_customer?
     @reservation.customer_id == current_user.id
+  end
+
+  def right_planner?
+    @reservation.planner_id == current_user.id
   end
 
   def customer_reserved?
