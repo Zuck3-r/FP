@@ -15,6 +15,8 @@ class Reservation < ApplicationRecord
   START_TIME_ID = 3
   END_TIME_ID = 10
 
+  scope :after_today, -> { where('date >= ?', Date.today) }
+
   def saturday_time
     return unless date.present?
     return unless time_table_id.present?

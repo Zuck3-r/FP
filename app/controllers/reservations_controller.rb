@@ -15,10 +15,10 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation = Reservation.find(params[:id])
-    if !@reservation.customer_id.nil? && right_customer?
+    if !customer_reserved? && right_customer?
       @reservation.update_attribute(:customer_id, nil)
       redirect_to customers_schedule_url, info: '予約をキャンセルしました'
-    elsif @reservation.customer_id.nil?
+    elsif customer_reserved?
       @reservation.update_attribute(:customer_id, current_user.id)
       redirect_to customers_schedule_url, info: '予約出来ました'
     else
@@ -34,6 +34,10 @@ class ReservationsController < ApplicationController
 
   def right_customer?
     @reservation.customer_id == current_user.id
+  end
+
+  def customer_reserved?
+    @reservation.customer_id.nil?
   end
 end
 
