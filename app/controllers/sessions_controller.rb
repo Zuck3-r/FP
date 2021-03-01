@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     @user = set_user
     if @user&.authenticate(session_params[:password])
       log_in(@user)
-      redirect_to root_url, info: 'ログインしました'
+      redirect_to current_user, info: 'ログインしました'
     else
       redirect_to login_path, danger: 'メールアドレス、パスワードが違います'
     end

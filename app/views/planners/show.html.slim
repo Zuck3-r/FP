@@ -1,0 +1,12 @@
+.center
+  .middle
+    h1
+      | プランナー名：
+      = current_user.name
+
+
+    h2
+      |予約枠を作成する
+
+    = render '/reservations/planner_reservation'
+

@@ -14,9 +14,19 @@ class CustomersController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def search
+    @planners_ids = PlannerSkill.where(skill: params[:skill_ids]).pluck(:planner_id)
+    @reservations = Reservation.where(date: params[:date], planner_id: @planners_ids, customer_id: nil)
+    return unless @reservations.empty?
 
-  def update; end
+    flash.now[:danger] = '一致する予約可能な枠がございません'
+    render 'show'
+  end
+
+  def schedule
+    @reservations = current_user.reservations
+    @reservations = @reservations.after_today
+  end
 
   private
 
