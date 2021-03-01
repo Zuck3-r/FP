@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get     '/customers/search', to: 'customers#search'
   get     '/customers/schedule', to: 'customers#schedule'
   post    '/reservations/:id', to: 'reservations#update'
+  get     '/planners/schedule', to: 'planners#schedule'
   resources :planners, only: %i[new create show edit update destroy]
   resources :customers, only: %i[new create show destroy]
   resources :reservations, only: %i[create update destroy]

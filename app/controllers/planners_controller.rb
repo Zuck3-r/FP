@@ -19,6 +19,10 @@ class PlannersController < ApplicationController
 
   def show
     @planner = Planner.find(current_user.id)
+    @reservation = Reservation.new
+    @reservations = current_user.reservations
+    @reservations = @reservations.after_today
+    @reservations = Reservation.where(customer_id: nil)
   end
 
   def edit
@@ -29,6 +33,15 @@ class PlannersController < ApplicationController
     @planner = Planner.find_by(id: current_user.id)
     @planner.update_attribute(:skill_ids, params[:planner][:skill_ids])
     redirect_to current_user, success: 'スキルを変更しました'
+  end
+
+  def schedule
+    @reservations = current_user.reservations
+    @reservations = @reservations.after_today
+    @reservations = @reservations.filled_reservation
+    return unless @reservations.empty?
+
+    redirect_to current_user, info: '現在、予約されている枠はありません'
   end
 
   private
