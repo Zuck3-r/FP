@@ -25,5 +25,13 @@ class TimeTable < ActiveHash::Base
   def time_range
     "#{start_time} ~ #{end_time}"
   end
+
+  def calender_start_time
+    start_time.delete('^0-9')
+  end
+
+  def calender_end_time
+    end_time.delete('^0-9')
+  end
 end
 
