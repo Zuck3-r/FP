@@ -10,6 +10,7 @@ class PlannersController < ApplicationController
 
   def create
     @planner = Planner.new(planner_params)
+
     if @planner.save
       redirect_to login_url, success: '登録完了　ログインしてください'
     else
@@ -18,7 +19,7 @@ class PlannersController < ApplicationController
   end
 
   def show
-    @planner = Planner.find(current_user.id)
+    @planner = Planner.find_by(id: current_user.id)
     @reservation = Reservation.new
     @reservations = current_user.reservations.after_today.empty_reservation
   end
