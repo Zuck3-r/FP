@@ -13,7 +13,7 @@ html
         - if session_planner?
           ul.navbar-nav
             li.nav-item
-              = link_to "今後の日程", '#', { class: "nav-link" }
+              = link_to "今後の日程", planners_schedule_url, { class: "nav-link" }
             li.nav-item
               = link_to "スキルの変更・確認", edit_planner_path(current_user) , { class: "nav-link" }
             li.nav-item

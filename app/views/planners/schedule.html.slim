@@ -1,0 +1,22 @@
+.center
+  .middle
+    h1
+      | 今後の日程
+
+
+table.table
+  thead.thead-dark
+    tr
+      th scope = "col" 日にち
+      th scope = "col" 時間
+      th scope = "col" お客様名
+      th scope = "col" グーグルカレンダーに登録
+
+- @reservations.each do |resv|
+  table.table
+    tbody
+      tr
+        td = resv.date
+        td = resv.time_table.time_range
+        td = Customer.find_by(id: resv.customer_id).name
+        td = link_to 'グーグルカレンダーに追加', "http://www.google.com/calendar/event?action=TEMPLATE&text=#{Customer.find_by(id: resv.customer_id).name}様との相談会&dates=#{resv.date.to_s(:number)}T#{resv.time_table.calender_start_time}/#{resv.date.to_s(:number)}T#{resv.time_table.calender_end_time}" , target: :_blank

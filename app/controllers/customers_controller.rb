@@ -26,6 +26,10 @@ class CustomersController < ApplicationController
   def schedule
     @reservations = current_user.reservations
     @reservations = @reservations.after_today
+    return unless @reservations.empty?
+
+    flash.now[:info] = '現在、予約している枠は存在しません'
+    render 'show'
   end
 
   private
