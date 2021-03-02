@@ -4,7 +4,7 @@ class ReservationsController < ApplicationController
   before_action :check_customer, only: [:update]
 
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = current_user.reservations.new(reservation_params)
 
     if @reservation.save
       redirect_to current_user, info: '登録出来ました'
@@ -43,7 +43,7 @@ class ReservationsController < ApplicationController
   private
 
   def reservation_params
-    params.require(:reservation).permit(:time_table_id, :date).merge(planner_id: current_user.id)
+    params.require(:reservation).permit(:time_table_id, :date)
   end
 
   def right_customer?
