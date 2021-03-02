@@ -79,3 +79,5 @@ gem 'rspec-request_describer'
 gem 'pry-rails'
 # add gem emoji-validator
 gem 'emoji-validator'
+# add gem rails-i18n
+gem 'rails-i18n'
