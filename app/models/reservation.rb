@@ -17,6 +17,7 @@ class Reservation < ApplicationRecord
 
   scope :after_today, -> { where('date >= ?', Date.today) }
   scope :filled_reservation, -> { where.not(customer_id: nil) }
+  scope :empty_reservation, -> { where(customer_id: nil) }
 
   def saturday_time
     return unless date.present?

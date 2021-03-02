@@ -20,9 +20,7 @@ class PlannersController < ApplicationController
   def show
     @planner = Planner.find(current_user.id)
     @reservation = Reservation.new
-    @reservations = current_user.reservations
-    @reservations = @reservations.after_today
-    @reservations = @reservations.where(customer_id: nil)
+    @reservations = current_user.reservations.after_today.empty_reservation
   end
 
   def edit
@@ -36,9 +34,7 @@ class PlannersController < ApplicationController
   end
 
   def schedule
-    @reservations = current_user.reservations
-    @reservations = @reservations.after_today
-    @reservations = @reservations.filled_reservation
+    @reservations = current_user.reservations.after_today.filled_reservation
     return unless @reservations.empty?
 
     redirect_to current_user, info: '現在、予約されている枠はありません'
