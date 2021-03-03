@@ -14,7 +14,7 @@ class ReservationsController < ApplicationController
   end
 
   def update
-    @reservation = current_user.reservations.find(params[:id])
+    @reservation = Reservation.find_by(id: params[:id])
 
     if !customer_reserved? && right_customer?
       @reservation.update_attribute(:customer_id, nil)

@@ -62,8 +62,24 @@ h3 {
 }
 
 .table{
-    width: 100%;
+    width: 60%;
     table-layout: fixed;
     margin-bottom: 1px;
+    margin: 0 auto;
 
+}
+
+.role {
+    position: relative;
+    bottom: -200px;
+}
+
+.planner {
+    position: relative;
+    right: 70px;
+}
+
+.customer {
+    position: relative;
+    left: 50px;
 }
