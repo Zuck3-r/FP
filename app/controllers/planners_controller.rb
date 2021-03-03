@@ -1,7 +1,7 @@
 class PlannersController < ApplicationController
   before_action :login_required, only: %i[edit update show schedule]
+  before_action :login_redirect, only: [:new]
   before_action :check_planner, only: %i[edit update show schedule]
-  def index; end
 
   def new
     @planner = Planner.new

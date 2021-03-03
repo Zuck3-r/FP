@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
-  def home
-    redirect_to current_user if logged_in?
-  end
+  before_action :login_redirect, only: %i[home choose]
+
+  def home; end
 
   def choose; end
 end

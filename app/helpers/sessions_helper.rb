@@ -32,6 +32,10 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def login_redirect
+    redirect_to current_user if logged_in?
+  end
+
   def session_planner?
     session[:role] == 'Planner'
   end
