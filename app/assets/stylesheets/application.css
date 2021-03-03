@@ -73,3 +73,13 @@ h3 {
     position: relative;
     bottom: -200px;
 }
+
+.planner {
+    position: relative;
+    right: 70px;
+}
+
+.customer {
+    position: relative;
+    left: 50px;
+}
