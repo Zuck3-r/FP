@@ -1,4 +1,9 @@
 class CustomersController < ApplicationController
+  before_action :login_required, only: %i[show search schedule]
+  before_action :login_redirect, only: [:new]
+  before_action :check_customer, only: %i[show search schedule]
+  before_action :check_past_day, only: [:search]
+
   def new
     @customer = Customer.new
   end
@@ -24,8 +29,7 @@ class CustomersController < ApplicationController
   end
 
   def schedule
-    @reservations = current_user.reservations
-    @reservations = @reservations.after_today
+    @reservations = current_user.reservations.after_today
     return unless @reservations.empty?
 
     flash.now[:info] = '現在、予約している枠は存在しません'
@@ -36,6 +40,10 @@ class CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def check_past_day
+    redirect_to current_user, danger: '明日以降の予定しか検索できません' if Date.today >= params[:date].to_date
   end
 end
 
