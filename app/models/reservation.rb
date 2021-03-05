@@ -37,5 +37,9 @@ class Reservation < ApplicationRecord
 
     errors.add(:date, '明日以降の日付を登録して下さい') if date <= Date.today
   end
+
+  def past_day?
+    date <= Date.today
+  end
 end
 

@@ -16,7 +16,7 @@ class ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find_by(id: params[:id])
 
-    if @reservation.date <= Date.today
+    if @reservation.past_day?
       redirect_to current_user, danger: '過去改変はできません'
     elsif !customer_reservable? && right_customer?
       @reservation.update_attribute(:customer_id, nil)
@@ -31,7 +31,8 @@ class ReservationsController < ApplicationController
 
   def destroy
     @reservation = current_user.reservations.find(params[:id])
-    if @reservation.date <= Date.today
+
+    if @reservation.past_day?
       redirect_to current_user, danger: '過去改変はできません'
     elsif !customer_reservable?
       redirect_to current_user, danger: '予約入ってんぞ～'

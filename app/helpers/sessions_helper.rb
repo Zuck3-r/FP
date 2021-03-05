@@ -33,6 +33,7 @@ module SessionsHelper
   end
 
   def login_redirect
+    # ログイン後は、新規登録画面やログインフォーム開かせないためのリダイレクト
     redirect_to current_user if logged_in?
   end
 
