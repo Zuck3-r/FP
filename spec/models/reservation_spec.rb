@@ -36,4 +36,14 @@ RSpec.describe Reservation, type: :model do
       it { is_expected.to belong_to(:customer).optional }
     end
   end
+
+  describe 'scope' do
+    let(:reservation_1){ create(:reservation) }
+    let(:reservation_2){ create(:reservation, customer_id: nil) }
+    let(:reservation_3){ create(:reservation, date: (Date.today - 1).strftime ) }
+
+    describe 'after_today' do
+
+    end
+  end
 end
