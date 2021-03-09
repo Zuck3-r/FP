@@ -9,15 +9,22 @@ RSpec.describe Reservation, type: :model do
     end
 
     describe 'custom validate' do
+      around do |e|
+        travel_to('2021-05-28'){ e.run }
+      end
 
       it 'is Saturday and invalid time table id' do
-        reservation = FactoryBot.build(:reservation, date: '2021-05-29', time_table_id: '1')
+        travel +1.day
+
+        reservation = FactoryBot.build(:reservation, date: Date.current.strftime, time_table_id: '1')
         reservation.valid?
         expect(reservation.errors[:time_table_id]).to include('土曜日は11時～15時までしか選択できません')
       end
 
       it 'Sunday' do
-        reservation = FactoryBot.build(:reservation, date: '2021-05-30')
+        travel +2.day
+
+        reservation = FactoryBot.build(:reservation, date: Date.current.strftime)
         reservation.valid?
         expect(reservation.errors[:date]).to include('日曜日は働いちゃダメです！')
       end
@@ -42,8 +49,8 @@ RSpec.describe Reservation, type: :model do
     let(:reservation_2){ create(:reservation, customer_id: nil) }
     let(:reservation_3){ create(:reservation, date: (Date.today - 1).strftime ) }
 
-    describe 'after_today' do
+      describe 'after_today' do
 
-    end
+      end
   end
 end
