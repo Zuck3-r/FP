@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
+  around do |e|
+    travel_to('2021-05-28'){ e.run }
+  end
   describe 'validations' do
     describe 'presence' do
       it { is_expected.to validate_presence_of(:time_table_id) }
@@ -9,9 +12,6 @@ RSpec.describe Reservation, type: :model do
     end
 
     describe 'custom validate' do
-      around do |e|
-        travel_to('2021-05-28'){ e.run }
-      end
 
       it 'is Saturday and invalid time table id' do
         travel +1.day
@@ -45,12 +45,31 @@ RSpec.describe Reservation, type: :model do
   end
 
   describe 'scope' do
-    let(:reservation_1){ create(:reservation) }
-    let(:reservation_2){ create(:reservation, customer_id: nil) }
-    let(:reservation_3){ create(:reservation, date: (Date.today - 1).strftime ) }
+    let!(:reservation_1){ create(:reservation, date: (Date.today + 3).strftime) }
+    let!(:reservation_2){ create(:reservation, date: (Date.today + 3).strftime, customer_id: nil) }
 
-      describe 'after_today' do
+    describe '.after_today' do
+      subject { Reservation.after_today }
 
+      it 'searching after today' do
+        is_expected.to match [reservation_1, reservation_2]
       end
+    end
+
+    describe '.empty_reservation' do
+      subject { Reservation.empty_reservation }
+
+      it 'searching empty reservation' do
+        is_expected.to match [reservation_2]
+      end
+    end
+
+    describe '.filled_reservation' do
+      subject { Reservation.filled_reservation }
+
+      it 'searching filled reservation' do
+        is_expected.to match [reservation_1]
+      end
+    end
   end
 end
