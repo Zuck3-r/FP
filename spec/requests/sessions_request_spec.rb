@@ -15,6 +15,12 @@ RSpec.describe "Sessions", type: :request do
       expect(response).to redirect_to planner
       expect(flash[:info]).to eq 'ログインしました'
     end
+
+    it 'fails login' do
+      #上手くいかない
+      post login_url, params: { session: { email: nil, password: nil, flag: 1 } }
+      is_expected.to eq 200
+    end
   end
 
   describe 'customer' do
@@ -24,6 +30,12 @@ RSpec.describe "Sessions", type: :request do
       post login_url, params: { session: { email: customer.email, password: customer.password, flag: 0 } }
       expect(response).to redirect_to customer
       expect(flash[:info]).to eq 'ログインしました'
+    end
+
+    it 'fails login' do
+      #上手くいかない
+      post login_url, params: { session: { email: nil, password: nil, flag: 0 } }
+      is_expected.to eq 200
     end
   end
 end
