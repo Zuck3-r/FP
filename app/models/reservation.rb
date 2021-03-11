@@ -11,6 +11,7 @@ class Reservation < ApplicationRecord
   validate :not_sunday
   validate :not_before_today
   validate :saturday_time
+  validate :till_next_year
 
   START_TIME_ID = 3
   END_TIME_ID = 10
@@ -38,6 +39,12 @@ class Reservation < ApplicationRecord
     return unless date.present?
 
     errors.add(:date, '明日以降の日付を登録して下さい') if date <= Date.current
+  end
+
+  def till_next_year
+    return unless date.present?
+
+    errors.add(:date, '一年以内の日程しか作成できません') if date >= Date.current.next_year
   end
 
   def past_day?
