@@ -16,7 +16,9 @@ class ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find_by(id: params[:id])
 
-    if @reservation.past_day?
+    if !current_user.reservations.find_by(date: @reservation.date, time_table_id: @reservation.time_table_id).nil?
+      redirect_to current_user, danger: '同じ日時の枠は取れないよ！'
+    elsif @reservation.past_day?
       redirect_to current_user, danger: '過去改変はできません'
     elsif !customer_reservable? && right_customer?
       @reservation.update_attribute(:customer_id, nil)

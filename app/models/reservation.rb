@@ -20,6 +20,10 @@ class Reservation < ApplicationRecord
   scope :filled_reservation, -> { where.not(customer_id: nil) }
   scope :empty_reservation, -> { where(customer_id: nil) }
 
+  def past_day?
+    date <= Date.current
+  end
+
   private
 
   def saturday_time
@@ -45,10 +49,6 @@ class Reservation < ApplicationRecord
     return unless date.present?
 
     errors.add(:date, '一年以内の日程しか作成できません') if date >= Date.current.next_year
-  end
-
-  def past_day?
-    date <= Date.current
   end
 end
 
