@@ -19,6 +19,8 @@ class Reservation < ApplicationRecord
   scope :filled_reservation, -> { where.not(customer_id: nil) }
   scope :empty_reservation, -> { where(customer_id: nil) }
 
+  private
+
   def saturday_time
     return unless date.present?
     return unless time_table_id.present?
