@@ -30,7 +30,7 @@ RSpec.describe Reservation, type: :model do
       end
 
       it 'today or past day' do
-        reservation = FactoryBot.build(:reservation, date: Date.today.strftime)
+        reservation = FactoryBot.build(:reservation, date: Date.current.strftime)
         reservation.valid?
         expect(reservation.errors[:date]).to include('明日以降の日付を登録して下さい')
       end
@@ -45,8 +45,8 @@ RSpec.describe Reservation, type: :model do
   end
 
   describe 'scope' do
-    let!(:reservation_1){ create(:reservation, date: (Date.today + 3).strftime) }
-    let!(:reservation_2){ create(:reservation, date: (Date.today + 3).strftime, customer_id: nil) }
+    let!(:reservation_1){ create(:reservation, date: (Date.current + 3).strftime) }
+    let!(:reservation_2){ create(:reservation, date: (Date.current + 3).strftime, customer_id: nil) }
 
     describe '.after_today' do
       subject { Reservation.after_today }

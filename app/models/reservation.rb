@@ -15,7 +15,7 @@ class Reservation < ApplicationRecord
   START_TIME_ID = 3
   END_TIME_ID = 10
 
-  scope :after_today, -> { where('date >= ?', Date.today) }
+  scope :after_today, -> { where('date >= ?', Date.current) }
   scope :filled_reservation, -> { where.not(customer_id: nil) }
   scope :empty_reservation, -> { where(customer_id: nil) }
 
@@ -35,11 +35,11 @@ class Reservation < ApplicationRecord
   def not_before_today
     return unless date.present?
 
-    errors.add(:date, '明日以降の日付を登録して下さい') if date <= Date.today
+    errors.add(:date, '明日以降の日付を登録して下さい') if date <= Date.current
   end
 
   def past_day?
-    date <= Date.today
+    date <= Date.current
   end
 end
 

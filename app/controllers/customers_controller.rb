@@ -43,7 +43,7 @@ class CustomersController < ApplicationController
   end
 
   def check_past_day
-    redirect_to current_user, danger: '明日以降の予定しか検索できません' if Date.today >= params[:date].to_date
+    redirect_to current_user, danger: '明日以降の予定しか検索できません' if Date.current >= params[:date].to_date
   end
 end
 
