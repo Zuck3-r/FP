@@ -2,6 +2,7 @@ class CustomersController < ApplicationController
   before_action :login_required, only: %i[show search schedule]
   before_action :login_redirect, only: [:new]
   before_action :check_customer, only: %i[show search schedule]
+  before_action :date_nil, only: [:search]
   before_action :check_past_day, only: [:search]
 
   def new
@@ -44,6 +45,10 @@ class CustomersController < ApplicationController
 
   def check_past_day
     redirect_to current_user, danger: '明日以降の予定しか検索できません' if Date.current >= params[:date].to_date
+  end
+
+  def date_nil
+    redirect_to current_user, danger: '日にち空欄だよお' if params[:date].empty?
   end
 end
 
