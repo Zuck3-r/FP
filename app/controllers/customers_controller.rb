@@ -23,6 +23,7 @@ class CustomersController < ApplicationController
   def search
     @planners_ids = PlannerSkill.where(skill: params[:skill_ids]).pluck(:planner_id)
     @reservations = Reservation.where(date: params[:date], planner_id: @planners_ids, customer_id: nil)
+    @reservations = @reservations.where.not(date: @reservation.date, time_table_id: @reservation.time_table_id)
     return unless @reservations.empty?
 
     flash.now[:danger] = '一致する予約可能な枠がございません'
