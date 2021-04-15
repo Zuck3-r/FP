@@ -81,3 +81,6 @@ gem 'pry-rails'
 gem 'emoji-validator'
 # add gem rails-i18n
 gem 'rails-i18n'
+
+gem 'coveralls', require: false
+
